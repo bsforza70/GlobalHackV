@@ -39,10 +39,12 @@ if (typeof window.localStorage != "undefined") {
 }
 
 function readSearch() {
-      // if input 1:
-      // return search(inputText, null);
-      // else if input 2:
-      // return search(null, inputText);
+      if (document.getElementById("numtype").options[document.getElementById("numtype").selectedIndex].value == "DL") {
+         search(document.getElementById("cd-name").value, null);
+      }
+      else if (document.getElementById("numtype").options[document.getElementById("numtype").selectedIndex].value == "CN") {
+         search(null, document.getElementById("cd-name").value);
+      }
 }
 
 // can search with license, citation, or both. if only one field is entered, other is null.
@@ -62,7 +64,7 @@ function search(searchLicense, searchCitation) {
                   }
             });
       });
-      return violationResults;
+      console.log(violationResults);
 }
 
 // Extra

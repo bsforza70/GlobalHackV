@@ -7,14 +7,13 @@
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="css/font-awesome.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div id="cova"></div>
-	<form class="cd-form floating-labels">
+	<form class="cd-form floating-labels" target="uploader_iframe">
 	<h1 id="titolo"> Par </h1>
 		<fieldset>
 
@@ -84,9 +83,9 @@
 
 			<div>
 				<p class="cd-select icon">
-					<select class="numtype">
-						<option>Driver's License Number</option>
-	          			<option>Citation Number</option>
+					<select id="numtype" class="numtype">
+						<option value="DL">Driver's License Number</option>
+	          			<option value="CN">Citation Number</option>
 					</select>
 				</p>
 			</div> 
@@ -99,12 +98,20 @@
 		    </div> 
 		</fieldset>
 		<div>
-		      	<input type="submit" value="Search Records">
+		      	<input onclick="readSearch()" id="final" type="submit" value="Search Records">
 		    </div>
 	</form>
-<script src="js/tabletop.js"></script> 
+	<iframe id="uploader_iframe" name="uploader_iframe" style="display: none;"></iframe>
+<script src="js/tabletop.js"></script>
+<script src="js/jquery-2.1.1.js"></script> 
 <script src="js/script.js"></script> 
-<script src="js/jquery-2.1.1.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
+  <script src="js/upup.min.js"></script>
+  <script>
+    UpUp.start({
+      'content-url': 'index.html', // show this page to offline users
+      'assets': ['http://fonts.googleapis.com/css?family=Open+Sans:400,300,700', 'css/reset.css', 'css/style.css', 'js/modernizr.js', 'https://fonts.googleapis.com/css?family=Raleway', 'js/tabletop.js', 'js/jquery-2.1.1.js', 'js/script.js', 'js/main.js']
+    });
+  </script>
 </body>
 </html>
