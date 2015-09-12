@@ -45,9 +45,8 @@ function readSearch() {
          search(null, document.getElementById("cd-name").value);
       }
 
-   //   document.getElementById(id).style.display = "none";
-
-
+      document.getElementById("landing").style.display = "none";
+      document.getElementById("results").style.display = "inherit";
 }
 
 // can search with license, citation, or both. if only one field is entered, other is null.
@@ -59,40 +58,39 @@ function search(searchLicense, searchCitation) {
                   citationResults.push(citation);
             }
       });
-   
+
+      function format(object, variable) {
+         return (variable + ": " + object[variable] + "\n").toLowerCase();
+      }
+
       // array of strings
       var text = [];
-
       citationResults.forEach(function (citation) {
-
-            violationList.forEach(function (violation) {
-                  if (citation["citation_number"] === violation["citation_number"]) {
-                        
-                  }
-            });
+         var citationText = "";
+         citationText += "Citation " + (citationResults.indexOf(citation) + 1) + "\n";
+         citationText += format(citation, "court_date");
+         citationText += format(citation, "court_location");
+         citationText += format(citation, "court_address");
+         text.push(citationText);
+         violationList.forEach(function (violation) {
+            if (citation["citation_number"] === violation["citation_number"]) {
+               violationText = "";
+               violationText += format(violation, "violation_description");
+               violationText += format(violation, "violation_number");
+               violationText += "warrant: " + (violation["warrant_status"] === "TRUE" ? violation["warrant_number"] : "none") + "\n";
+               violationText += format(violation, "court_cost");
+               violationText += format(violation, "fine_amount");
+               violationText += format(violation, "status");
+               violationText += format(violation, "status_date");
+               text.push(violationText);
+            }
+         });
       });
-      
-}
-
-function toString(violation) {
-   var result = "";
-
-   function format(variable) {
-      return variable + ": " + "\"" + violation[variable] + "\"\n";
-   }
-
-   // Spiffy this up later?
-
-   result += format("violation_description");
-   result += format("violation_number");
-   result += format("warrant_number");
-   result += format("warrant_status");
-   result += format("court_cost");
-   result += format("fine_amount");
-   result += format("status");
-   result += format("status_date");
-
-   return result.toLowerCase();
+      text.forEach(function (s) {
+         console.log(s);
+         console.log("");
+      });
+      return text;
 }
 
 // Extra
