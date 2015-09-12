@@ -6,7 +6,7 @@ function violations() {
                         console.log(data);
                         violationList = data; 
                         
-                        localStorage.setItem("violations", JSON.stringify(x));
+                        localStorage.setItem("violations", JSON.stringify(violationList));
                    },
                    simpleSheet: true } )
 }
@@ -17,7 +17,7 @@ function citations() {
                         console.log(data);
                         citationList = data; 
                         
-                        localStorage.setItem("citations", JSON.stringify(y));
+                        localStorage.setItem("citations", JSON.stringify(citationList));
                    },
                    simpleSheet: true } )
 }
