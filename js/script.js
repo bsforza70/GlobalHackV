@@ -69,32 +69,58 @@ function search(searchLicense, searchCitation) {
 
 function getFine(violation) {
       var fine = violation["fine_amount"];
-      return parseInt(fine.replace("$", ""));
+      if (!fine) {
+            return 0;
+      }
+      else return result = Number(fine.replace("$", ""));
 }
 
-function getFineAnalytics(violation) {
-      var desc = violation["violation_description"];
-      var violationResults;
+function getAnalytics(selectedViolation, criteria) {
+      var match = selectedViolation[criteria];
+      var violationResults = [];
       violationList.forEach(function (violation) {
-            if (violation["violation_description"] == desc) {
+            if (violation[criteria] === match) {
                   violationResults.push(violation);
             }
       });
+
+      // removes elements where cost = 0 (not filled in)
+      for (var i = 0; i < violationResults.length; i++) {
+            if (getFine(violationResults[i]) === 0) {
+               console.log("Deleted");
+               violationResults.splice(i, 1);
+                  i--;
+            }
+      }
+
+      // MEAN:
       var total = 0;
       violationResults.forEach(function (violation) {
-            total += getFine(violation));
+            total += getFine(violation);
       });
       var mean = total * 1.0 / violationResults.length;
 
+      // STANDARD DEVIATION
+      var sum = 0;
+      violationResults.forEach(function (violation) {
+            sum += Math.pow(mean - getFine(violation), 2);
+      });
+      var std = Math.pow(sum * 1.0 / violationResults.length, .5);
+
+      // MEDIAN:
       // sort violationResults via selectionsort
       for (var i = 0; i < violationResults.length; i++) {
             var min = i;
             for (var j = i; j < violationResults.length; j++) {
-                  if (getFine(violationResults[j]) < getFine(violationResults[i])) min = j;
+                  if (getFine(violationResults[j]) < getFine(violationResults[min])) min = j;
             } // swap:
-            var temp = i; i = min; j = i;
-      }
-      var median = violationResults[violationResults.length / 2]["fine_amount"];
+            var temp = violationResults[i];
+            violationResults[i] = violationResults[min];
+            violationResults[min] = temp
+;      }
 
-      return [mean, median];
+      var medianViolation = violationResults[Math.floor(violationResults.length / 2)];
+      var median = getFine(medianViolation);
+
+      return {mean, median, std};
 }
