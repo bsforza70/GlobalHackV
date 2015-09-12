@@ -1,4 +1,4 @@
-var citationList; var violationList;
+var citationList; var violationList; var twel;
 function violations() {
   Tabletop.init( { key: '17bDo_Ang2nOfj9Ttj__jymIMetRR86g-eDoF40EZcC0',
                    callback: function(data, tabletop) { 
@@ -26,7 +26,6 @@ function StoreOffline() {
       violations();
       citations();
 }
-
 
 if (typeof window.localStorage != "undefined") {
       if (localStorage.getItem("violations") == null || localStorage.getItem("citations") == null) {
@@ -65,6 +64,7 @@ function search(searchLicense, searchCitation) {
             });
       });
       console.log(violationResults);
+      twel = violationResults;
 }
 
 // Extra
@@ -100,14 +100,14 @@ function getAnalytics(selectedViolation, criteria) {
       violationResults.forEach(function (violation) {
             total += getFine(violation);
       });
-      var mean = total * 1.0 / violationResults.length;
+      var mean = (total * 1.0 / violationResults.length).toFixed(2);
 
       // STANDARD DEVIATION
       var sum = 0;
       violationResults.forEach(function (violation) {
             sum += Math.pow(mean - getFine(violation), 2);
       });
-      var std = Math.pow(sum * 1.0 / violationResults.length, .5);
+      var std = Math.pow(sum * 1.0 / violationResults.length, .5).toFixed(2);
 
       // MEDIAN:
       // sort violationResults via selectionsort
@@ -122,7 +122,28 @@ function getAnalytics(selectedViolation, criteria) {
 ;      }
 
       var medianViolation = violationResults[Math.floor(violationResults.length / 2)];
-      var median = getFine(medianViolation);
+      var median = getFine(medianViolation).toFixed(2);
 
       return {mean, median, std};
 }
+
+function toString(violation) {
+   var result = "";
+
+   function format(variable) {
+      return variable + ": " + "\"" + violation[variable] + "\"\n";
+   }
+
+   result += format("citation_number");
+   result += format("court_cost");
+   result += format("fine_amount");
+   result += format("status");
+   result += format("status_date");
+   result += format("violation_description");
+   result += format("violation_number");
+   result += format("warrant_number");
+   result += format("warrant_status");
+
+   return result.toLowerCase();
+}
+
