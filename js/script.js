@@ -1,10 +1,10 @@
-var x; var y;
+var citationList; var violationList;
 function violations() {
   Tabletop.init( { key: '17bDo_Ang2nOfj9Ttj__jymIMetRR86g-eDoF40EZcC0',
                    callback: function(data, tabletop) { 
 
                         console.log(data);
-                        x = data; 
+                        violationList = data; 
                         
                         localStorage.setItem("violations", JSON.stringify(x));
                    },
@@ -15,7 +15,7 @@ function citations() {
                    callback: function(data, tabletop) { 
 
                         console.log(data);
-                        y = data; 
+                        citationList = data; 
                         
                         localStorage.setItem("citations", JSON.stringify(y));
                    },
@@ -33,26 +33,27 @@ if (typeof window.localStorage != "undefined") {
             StoreOffline();
       }
       else {
-            x = JSON.parse(localStorage.getItem("violations"));
-            y = JSON.parse(localStorage.getItem("citations"));
+            violationList = JSON.parse(localStorage.getItem("violations"));
+            citationList = JSON.parse(localStorage.getItem("citations"));
       }
 }
 
-// // store
-// localStorage.setItem("violations", x);
+function search(searchLicense, searchCitation) {
+      var citationResults = [];
+      citationList.forEach(function (citation) {
+            if (citation["citation_number"] === searchCitation ||
+                  citation["drivers_license_number"] === searchLicense) {
+                  citationResults.push(citation);
+            }
+      });
+      var violationResults = [];
+      citationResults.forEach(function (citation) {
+            violationList.forEach(function (violation) {
+                  if (citation["citation_number"] === violation["citation_number"]) {
+                        violationResults.push(violation);
+                  }
+            });
+      });
+      return violationResults;
+}
 
-// // retrieve
-// console.log(localStorage.getItem("hello"));
-
-// // delete
-// localStorage.removeItem("hello");
-
-// var testObject = { 'one': 1, 'two': 2, 'three': 3 };
-
-// // Put the object into storage
-// localStorage.setItem('testObject', JSON.stringify(testObject));
-
-// // Retrieve the object from storage
-// var retrievedObject = localStorage.getItem('testObject');
-
-// console.log('retrievedObject: ', JSON.parse(retrievedObject));
