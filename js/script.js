@@ -1,4 +1,4 @@
-var citationList; var violationList; var twel;
+var citationList; var violationList;
 function violations() {
   Tabletop.init( { key: '17bDo_Ang2nOfj9Ttj__jymIMetRR86g-eDoF40EZcC0',
                    callback: function(data, tabletop) { 
@@ -44,6 +44,10 @@ function readSearch() {
       else if (document.getElementById("numtype").options[document.getElementById("numtype").selectedIndex].value == "CN") {
          search(null, document.getElementById("cd-name").value);
       }
+
+   //   document.getElementById(id).style.display = "none";
+
+
 }
 
 // can search with license, citation, or both. if only one field is entered, other is null.
@@ -55,16 +59,40 @@ function search(searchLicense, searchCitation) {
                   citationResults.push(citation);
             }
       });
-      var violationResults = [];
+   
+      // array of strings
+      var text = [];
+
       citationResults.forEach(function (citation) {
+
             violationList.forEach(function (violation) {
                   if (citation["citation_number"] === violation["citation_number"]) {
-                        violationResults.push(violation);
+                        
                   }
             });
       });
-      console.log(violationResults);
-      twel = violationResults;
+      
+}
+
+function toString(violation) {
+   var result = "";
+
+   function format(variable) {
+      return variable + ": " + "\"" + violation[variable] + "\"\n";
+   }
+
+   // Spiffy this up later?
+
+   result += format("violation_description");
+   result += format("violation_number");
+   result += format("warrant_number");
+   result += format("warrant_status");
+   result += format("court_cost");
+   result += format("fine_amount");
+   result += format("status");
+   result += format("status_date");
+
+   return result.toLowerCase();
 }
 
 // Extra
@@ -126,24 +154,3 @@ function getAnalytics(selectedViolation, criteria) {
 
       return {mean, median, std};
 }
-
-function toString(violation) {
-   var result = "";
-
-   function format(variable) {
-      return variable + ": " + "\"" + violation[variable] + "\"\n";
-   }
-
-   result += format("citation_number");
-   result += format("court_cost");
-   result += format("fine_amount");
-   result += format("status");
-   result += format("status_date");
-   result += format("violation_description");
-   result += format("violation_number");
-   result += format("warrant_number");
-   result += format("warrant_status");
-
-   return result.toLowerCase();
-}
-
