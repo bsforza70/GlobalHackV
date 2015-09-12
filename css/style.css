@@ -1,4 +1,4 @@
-*:focus {
+button:focus {
   outline: none !important;
   background-image: none !important;
   outline: 0 !important;
@@ -8,9 +8,10 @@
 }
 
 body {
-	background-color: #BC6B62;
+	background-color: rgba(243, 156, 18, 0.1) !important;
 	text-align: center;
 	overflow: hidden;
+	color: white;
 }
 * {
 	-moz-box-sizing: border-box;
@@ -19,4 +20,10 @@ body {
 	padding: 0;
 	list-style: none;
 	position: relative;
+}
+#initform {
+	margin-top: 25%;
+}
+textarea, textarea.form-control, input.form-control, input[type=text], input[type=password], input[type=email], input[type=number], [type=text].form-control, [type=password].form-control, [type=email].form-control, [type=tel].form-control, [contenteditable].form-control {
+	font-size: 22px;
 }
