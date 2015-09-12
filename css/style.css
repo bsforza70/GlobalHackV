@@ -238,7 +238,7 @@ Form
 .cd-form input[type="submit"] {
   /* button style */
   border: none;
-  background: #2c97de;
+  background: #34495E;
   border-radius: .25em;
   padding: 16px 20px;
   color: #ffffff;
@@ -254,18 +254,18 @@ Form
   appearance: none;
 }
 .no-touch .cd-form input[type="submit"]:hover {
-  background: #42a2e1;
+  background: #24394E;
 }
 .cd-form input[type="submit"]:focus {
   outline: none;
   background: #2b3e51;
 }
 .cd-form input[type="submit"]:active {
-  -webkit-transform: scale(0.9);
-  -moz-transform: scale(0.9);
-  -ms-transform: scale(0.9);
-  -o-transform: scale(0.9);
-  transform: scale(0.9);
+  -webkit-transform: scale(0.95);
+  -moz-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  transform: scale(0.95);
 }
 .cd-form .error-message p {
   background: #e94b35;
