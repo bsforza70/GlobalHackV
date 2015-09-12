@@ -38,6 +38,14 @@ if (typeof window.localStorage != "undefined") {
       }
 }
 
+function readSearch() {
+      // if input 1:
+      // return search(inputText, null);
+      // else if input 2:
+      // return search(null, inputText);
+}
+
+// can search with license, citation, or both. if only one field is entered, other is null.
 function search(searchLicense, searchCitation) {
       var citationResults = [];
       citationList.forEach(function (citation) {
@@ -54,6 +62,6 @@ function search(searchLicense, searchCitation) {
                   }
             });
       });
+      console.log("HI");
       return violationResults;
 }
-
