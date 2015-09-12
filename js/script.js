@@ -62,6 +62,39 @@ function search(searchLicense, searchCitation) {
                   }
             });
       });
-      console.log("HI");
       return violationResults;
+}
+
+// Extra
+
+function getFine(violation) {
+      var fine = violation["fine_amount"];
+      return parseInt(fine.replace("$", ""));
+}
+
+function getFineAnalytics(violation) {
+      var desc = violation["violation_description"];
+      var violationResults;
+      violationList.forEach(function (violation) {
+            if (violation["violation_description"] == desc) {
+                  violationResults.push(violation);
+            }
+      });
+      var total = 0;
+      violationResults.forEach(function (violation) {
+            total += getFine(violation));
+      });
+      var mean = total * 1.0 / violationResults.length;
+
+      // sort violationResults via selectionsort
+      for (var i = 0; i < violationResults.length; i++) {
+            var min = i;
+            for (var j = i; j < violationResults.length; j++) {
+                  if (getFine(violationResults[j]) < getFine(violationResults[i])) min = j;
+            } // swap:
+            var temp = i; i = min; j = i;
+      }
+      var median = violationResults[violationResults.length / 2]["fine_amount"];
+
+      return [mean, median];
 }
