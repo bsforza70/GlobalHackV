@@ -3,38 +3,40 @@ function violations() {
   Tabletop.init( { key: '17bDo_Ang2nOfj9Ttj__jymIMetRR86g-eDoF40EZcC0',
                    callback: function(data, tabletop) { 
 
-                   	console.log(data);
-                   	x = data; 
-                   	
-                   	localStorage.setItem("violations", JSON.stringify(x));
+                        console.log(data);
+                        x = data; 
+                        
+                        localStorage.setItem("violations", JSON.stringify(x));
                    },
                    simpleSheet: true } )
 }
 function citations() {
-	Tabletop.init( { key: '1vi8neFTP5YyQdWDfu9RV7YLhWUF7ceoaVv9Hdga_Qas',
+      Tabletop.init( { key: '1vi8neFTP5YyQdWDfu9RV7YLhWUF7ceoaVv9Hdga_Qas',
                    callback: function(data, tabletop) { 
 
-                   	console.log(data);
-                   	y = data; 
-                   	
-                   	localStorage.setItem("citations", JSON.stringify(y));
+                        console.log(data);
+                        y = data; 
+                        
+                        localStorage.setItem("citations", JSON.stringify(y));
                    },
                    simpleSheet: true } )
 }
 
 function StoreOffline() {
-	violations();
-	citations();
+      violations();
+      citations();
 }
 
-if (typeof window.localStorage != "undefined" && (localStorage.getItem("violations") == null || localStorage.getItem("citations") == null)) {
-	StoreOffline();
-}
-else if (typeof window.localStorage != "undefined" && localStorage.getItem("violations") != null && localStorage.getItem("citations") != null) {
-	x = JSON.parse(localStorage.getItem("violations"))
-	y = JSON.parse(localStorage.getItem("citations"))
-}
 
+if (typeof window.localStorage != "undefined") {
+      if (localStorage.getItem("violations") == null || localStorage.getItem("citations") == null) {
+            StoreOffline();
+      }
+      else {
+            x = JSON.parse(localStorage.getItem("violations"));
+            y = JSON.parse(localStorage.getItem("citations"));
+      }
+}
 
 // // store
 // localStorage.setItem("violations", x);
