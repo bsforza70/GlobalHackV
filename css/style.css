@@ -388,7 +388,7 @@ FLoating labels
   border-radius: 2px;
   background-clip: padding-box;
   background-color: white;
-
+  line-height: 175%;
 }
 .outy {
   border: 2px solid;

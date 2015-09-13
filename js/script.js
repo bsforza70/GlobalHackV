@@ -167,16 +167,31 @@ function append() {
    }
    console.log(gainMark);
    twel = 0;
+   var cost = "";
+   var pay = "";
+   var warrant_count = 0;
    while (twel < gainMark.length) {
       if (gainMark[twel] == "citation") {
-         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Citation: ' + gains[twel]["citation_number"] + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Citation: ' + gains[twel]["citation_number"] + '<br/>Court Date: ' + gains[twel]["court_date"].slice(0,-7) + '<br/>Court: ' + gains[twel]["court_address"] + ', ' + gains[twel]["court_location"].toLowerCase() + '<br/></p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Find a Lawyer</a><a href="https://www.officialpayments.com/pay-citations-online.jsp" target="new_blank">Pay Online</a></div></div></div></div>');
       }
       else if (gainMark[twel] == "violation") {
-         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Violation: '+ gains[twel]["violation_number"] + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+         if (gains[twel]["warrant_status"] == "TRUE") {
+            warrant_count++;
+         }
+         if (gains[twel]["fine_amount"] != "" && gains[twel]["court_cost"] != "") {
+            cost = '<br/>Fine Amount: ' + gains[twel]["fine_amount"] + '<br/>Court Cost: ' + gains[twel]["court_cost"] + '<br/>'
+         }
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Violation: '+ gains[twel]["violation_number"] + '<br/>Reason: ' + gains[twel]["violation_description"] + cost + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Find a Lawyer</a></div></div></div></div>');
       }
       twel++;
    }
 
+   if (warrant_count == 1) {
+      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There is a warrant out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="#" target="new_blank">Find a Lawyer</a></div></div></div></div>');
+   }
+   else if (warrant_count > 1) {
+      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There are ' + warrant_count + ' warrants out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+   }
 
 
 }
