@@ -390,6 +390,9 @@ FLoating labels
   background-color: white;
 
 }
+.outy {
+  border: 2px solid;
+}
 .card span.card-title {
     color: #fff;
     font-size: 24px;

@@ -1,4 +1,4 @@
-var citationList; var violationList;
+var citationList; var violationList; var a; var citationResults; var gains = []; var twel; var gainMark = [];
 function violations() {
   Tabletop.init( { key: '17bDo_Ang2nOfj9Ttj__jymIMetRR86g-eDoF40EZcC0',
                    callback: function(data, tabletop) { 
@@ -66,6 +66,8 @@ function search(searchLicense, searchCitation) {
       // array of strings
       var text = [];
       citationResults.forEach(function (citation) {
+         console.log(citation);
+         gains.push(citation);
          var citationText = "";
          citationText += "Citation " + (citationResults.indexOf(citation) + 1) + "\n";
          citationText += format(citation, "court_date");
@@ -74,6 +76,8 @@ function search(searchLicense, searchCitation) {
          text.push(citationText);
          violationList.forEach(function (violation) {
             if (citation["citation_number"] === violation["citation_number"]) {
+               console.log(violation);
+               gains.push(violation);
                violationText = "";
                violationText += format(violation, "violation_description");
                violationText += format(violation, "violation_number");
@@ -86,11 +90,7 @@ function search(searchLicense, searchCitation) {
             }
          });
       });
-      text.forEach(function (s) {
-         console.log(s);
-         console.log("");
-      });
-      return text;
+      append();
 }
 
 // Extra
@@ -152,3 +152,65 @@ function getAnalytics(selectedViolation, criteria) {
 
       return {mean, median, std};
 }
+
+function append() {
+   var twel = 0;
+   gainMark = [];
+   while (twel < gains.length) {
+      if (gains[twel]["citation_date"] != undefined) {
+         gainMark.push("citation");
+      }
+      else {
+         gainMark.push("violation");
+      }
+      twel++;
+   }
+   console.log(gainMark);
+   twel = 0;
+   while (twel < gainMark.length) {
+      if (gainMark[twel] == "citation") {
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Citation: ' + gains[twel]["citation_number"] + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+      }
+      else if (gainMark[twel] == "violation") {
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Violation: '+ gains[twel]["violation_number"] + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+      }
+      twel++;
+   }
+
+
+
+}
+
+
+// Citation 
+
+// citation_date: "2/10/2015 0:00:00"
+// citation_number: "877826802"
+// court_address: "625 New Smizer Mill Road"
+// court_date: "11/12/2015 0:00:00"
+// court_location: "FENTON"
+// date_of_birth: "4/10/1992 0:00:00"
+// defendant_address: "62819 Jay Way"
+// defendant_city: "HILLSDALE"
+// defendant_state: "MO"
+// drivers_license_number: "A840420280"
+// first_name: "Lori"
+// last_name: "Grant"
+
+// violation
+
+// citation_number: "866159336"
+// court_cost: "$24.50"
+// fine_amount: "$51.16"
+// status: "CONT FOR PAYMENT"
+// status_date: "8/7/2015"
+// violation_description: "Improper Passing"
+// violation_number: "866159336-01"
+// warrant_number: ""
+// warrant_status: "FALSE"
+
+
+
+
+// <div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Cards for display in portfolio style material design by Google.</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>
+
