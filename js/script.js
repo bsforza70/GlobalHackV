@@ -179,7 +179,7 @@ function append() {
    var warrant_count = 0;
    while (twel < gainMark.length) {
       if (gainMark[twel] == "citation") {
-         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Citation: ' + gains[twel]["citation_number"] + '<br/>Court Date: ' + gains[twel]["court_date"].slice(0,-7) + '<br/>Court: ' + gains[twel]["court_address"] + ', ' + gains[twel]["court_location"].toLowerCase() + '<br/></p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Find a Lawyer</a><a href="https://www.officialpayments.com/pay-citations-online.jsp" target="new_blank">Pay Online</a></div></div></div></div>');
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Citation: ' + gains[twel]["citation_number"] + '<br/>Court Date: ' + gains[twel]["court_date"].slice(0,-7) + '<br/>Court: ' + gains[twel]["court_address"] + ', ' + gains[twel]["court_location"].toLowerCase() + '<br/></p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="http://www.avvo.com/find-a-lawyer" target="new_blank">Find a Lawyer</a><a href="https://www.officialpayments.com/pay-citations-online.jsp" target="new_blank">Pay Online</a></div></div></div></div>');
       }
       else if (gainMark[twel] == "violation") {
          if (gains[twel]["warrant_status"] == "TRUE") {
@@ -188,65 +188,64 @@ function append() {
          if (gains[twel]["fine_amount"] != "" && gains[twel]["court_cost"] != "") {
             cost = '<br/>Fine Amount: ' + gains[twel]["fine_amount"] + '<br/>Court Cost: ' + gains[twel]["court_cost"] + '<br/>'
          }
-         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Violation: '+ gains[twel]["violation_number"] + '<br/>Reason: ' + gains[twel]["violation_description"] + cost + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="#" target="new_blank">Find a Lawyer</a></div></div></div></div>');
+         document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div class="card"><div class="card-content"><p>Violation: '+ gains[twel]["violation_number"] + '<br/>Reason: ' + gains[twel]["violation_description"] + cost + '</p></div><div class="card-action"><a href="#" target="new_blank">Resolve</a><a href="http://www.avvo.com/find-a-lawyer" target="new_blank">Find a Lawyer</a></div></div></div></div>');
       }
       twel++;
    }
-}
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
    if (warrant_count == 1) {
-      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There is a warrant out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="#" target="new_blank">Find a Lawyer</a></div></div></div></div>');
+      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There is a warrant out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="http://www.avvo.com/find-a-lawyer" target="new_blank">Find a Lawyer</a></div></div></div></div>');
    }
    else if (warrant_count > 1) {
-      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There are ' + warrant_count + ' warrants out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="#" target="new_blank">Request a Lawyer</a></div></div></div></div>');
+      document.getElementById('upload3me').insertAdjacentHTML( 'afterbegin', '<div class="row"> <div class="col-md-6 col-md-offset-3"><div style="background-color:rgba(231, 76, 60,1);color:white !important;" class="card"><div class="card-content"><p>Warning!<br/>There are ' + warrant_count + ' warrants out for your arrest!</p></div><div style="border-top: 2px white solid;" class="card-action"><a style="color:white;" href="#" target="new_blank">Resolve</a><a style="color:white;" href="http://www.avvo.com/find-a-lawyer" target="new_blank">Find a Lawyer</a></div></div></div></div>');
    }
-
-
-=======
-/*****************************************************************************/
-// LAWYER SEARCH:
-
-var lawyerData = "The Powderly Law Firm, L.L.C.*314-301-8865*11965 Saint Charles Rock Road, Suite 202, St. Louis, MO 63044
-JCS Law*314-732-4277*75 West Lockwood Avenue, Suite 222, St. Louis, MO 63119
-Devereaux, Stokes, Nolan, Fernandez & Leonard, P.C.*314-621-3743*133 South 11th Street, Suite 350, St. Louis, MO 63102-1133
-Law Office of Frank J. Niesen, Jr.*314-421-5800*319 North Fourth Street, Suite 200, St. Louis, MO 63102-1929
-Shepherd, Taylor, Korum & Curtis, L.L.P.*314-714-4594*222 South Central Avenue, Suite 804, St. Louis, MO 63105-3592
-The Law Office of Gregory N. Smith, LLC*314-492-6326*7733 Forsyth Boulevard, Suite 1850, St. Louis, MO 63105
-Law Offices of Steven K. Brown*314-421-2011*1221 Locust Street, Suite 500, St. Louis, MO 63103
-Kruse Law, LLC*314-297-0650*2016 S. Big Bend Boulevard, St. Louis, MO 63117
-James F. Haffner*314-647-2112*3228 Ivanhoe, St. Louis, MO 63139
-Kazanas LC Law Firm*314-685-8639*321 West Port Plaza Drive, Suite 201, St. Louis, MO 63146
-The Welby Law Firm, LLC*314-309-2195*1221 Locust Street, 4th Floor, St. Louis, MO 63103
-The Ross Law Firm, LLC*636-200-3785*16024 Manchester Road, Suite 200, St. Louis, MO 63011
-Nick A. Zotos, Attorney at Law*314-534-1797*4235 Lindell Boulevard, St. Louis, MO 63108-2915
-Law Offices of Wolff and D'Agrosa, LLC*314-725-8019*7710 Carondelet Avenue, Suite 200, St. Louis, MO 63105
-Mandel & Mandel, L.L.P.*877-893-1256*1108 Olive Street, Fifth Floor, St. Louis, MO 63101-1922
-Law Office of Amy R. Johnson, LLC*314-300-6789*3500 Magnolia Ave., St. Louis, MO 63118
-Clooney & Anderson*314-492-6788*319 North Fourth Street, Suite 200, St. Louis, MO 63102
-Missouri Traffic Pro, LLC*314-896-1934*2190 S. Mason Rd., Suite 200, St. Louis, MO 63131
-The Lowry Law Firm*636-707-0168
-Blackwell & Associates, P.C.*636-614-1771
-Shea, Kohl & Alessi, LC*855-683-8265
-Smith & Daiber, LLC*866-916-8339
-The McKay Law Firm, LLC*636-556-0805";
-
-function getLawyerData() {
-   var lawyerData = prompt();
-   result = [];
-   lines = lawyerData.split("\n");
-   lines.forEach(function(part) {
-      var tag;
-      switch (lines.indexOf(part)) {
-         case 0: tag = "Name: "; break;
-         case 1: tag = "Phone: "; break;
-         case 2: tag = "Address: "; break;
-      }
-      result.push(tag + part + "");
-   });
-   return result;
->>>>>>> origin/master
 }
+
+// // =======
+// /*****************************************************************************/
+// // LAWYER SEARCH:
+
+// var lawyerData = "The Powderly Law Firm, L.L.C.*314-301-8865*11965 Saint Charles Rock Road, Suite 202, St. Louis, MO 63044
+// JCS Law*314-732-4277*75 West Lockwood Avenue, Suite 222, St. Louis, MO 63119
+// Devereaux, Stokes, Nolan, Fernandez & Leonard, P.C.*314-621-3743*133 South 11th Street, Suite 350, St. Louis, MO 63102-1133
+// Law Office of Frank J. Niesen, Jr.*314-421-5800*319 North Fourth Street, Suite 200, St. Louis, MO 63102-1929
+// Shepherd, Taylor, Korum & Curtis, L.L.P.*314-714-4594*222 South Central Avenue, Suite 804, St. Louis, MO 63105-3592
+// The Law Office of Gregory N. Smith, LLC*314-492-6326*7733 Forsyth Boulevard, Suite 1850, St. Louis, MO 63105
+// Law Offices of Steven K. Brown*314-421-2011*1221 Locust Street, Suite 500, St. Louis, MO 63103
+// Kruse Law, LLC*314-297-0650*2016 S. Big Bend Boulevard, St. Louis, MO 63117
+// James F. Haffner*314-647-2112*3228 Ivanhoe, St. Louis, MO 63139
+// Kazanas LC Law Firm*314-685-8639*321 West Port Plaza Drive, Suite 201, St. Louis, MO 63146
+// The Welby Law Firm, LLC*314-309-2195*1221 Locust Street, 4th Floor, St. Louis, MO 63103
+// The Ross Law Firm, LLC*636-200-3785*16024 Manchester Road, Suite 200, St. Louis, MO 63011
+// Nick A. Zotos, Attorney at Law*314-534-1797*4235 Lindell Boulevard, St. Louis, MO 63108-2915
+// Law Offices of Wolff and D'Agrosa, LLC*314-725-8019*7710 Carondelet Avenue, Suite 200, St. Louis, MO 63105
+// Mandel & Mandel, L.L.P.*877-893-1256*1108 Olive Street, Fifth Floor, St. Louis, MO 63101-1922
+// Law Office of Amy R. Johnson, LLC*314-300-6789*3500 Magnolia Ave., St. Louis, MO 63118
+// Clooney & Anderson*314-492-6788*319 North Fourth Street, Suite 200, St. Louis, MO 63102
+// Missouri Traffic Pro, LLC*314-896-1934*2190 S. Mason Rd., Suite 200, St. Louis, MO 63131
+// The Lowry Law Firm*636-707-0168
+// Blackwell & Associates, P.C.*636-614-1771
+// Shea, Kohl & Alessi, LC*855-683-8265
+// Smith & Daiber, LLC*866-916-8339
+// The McKay Law Firm, LLC*636-556-0805";
+
+// function getLawyerData() {
+//    var lawyerData = prompt();
+//    result = [];
+//    lines = lawyerData.split("\n");
+//    lines.forEach(function(part) {
+//       var tag;
+//       switch (lines.indexOf(part)) {
+//          case 0: tag = "Name: "; break;
+//          case 1: tag = "Phone: "; break;
+//          case 2: tag = "Address: "; break;
+//       }
+//       result.push(tag + part + "");
+//    });
+//    return result;
+// // >>>>>>> origin/master
+// }
 
 
 
